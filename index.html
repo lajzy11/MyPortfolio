@@ -5,15 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIA | UI/UX & Product Designer Portfolio</title>
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Feather Icons CDN -->
-    <script src="https://unpkg.com/feather-icons"></script>
-
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS CDN with dark mode support -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -23,457 +15,909 @@
                     colors: {
                         brand: {
                             DEFAULT: '#26A69A',
-                            dark: '#1f877d',
-                            light: '#4db6ac',
-                            soft: 'rgba(38, 166, 154, 0.08)',
-                            border: 'rgba(38, 166, 154, 0.25)'
+                            light: '#E8F5F4',
+                            hover: '#1F8A80',
+                            dark: '#145D56',
+                            muted: '#A2D9D3'
+                        },
+                        neutral: {
+                            50: '#FAFBFB',
+                            100: '#F3F5F5',
+                            200: '#E5E8E8',
+                            300: '#D1D6D6',
+                            600: '#647070',
+                            700: '#414D4D',
+                            800: '#2C3535',
+                            900: '#141A1A'
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        sans: ['Inter', 'PingFang TC', 'Microsoft JhengHei', 'sans-serif']
+                    },
+                    letterSpacing: {
+                        relaxed: '0.05em',
+                        wide: '0.1em',
+                        wider: '0.15em'
                     }
                 }
             }
         }
     </script>
+    
+    <!-- Google Font - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Feather Icons for minimalist SVG icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
 
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.02em;
+        /* Custom subtle focus states and selection */
+        ::selection {
+            background-color: #26A69A;
+            color: #ffffff;
         }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        ::-webkit-scrollbar-track {
-            background: transparent;
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 9999px;
+
+        /* Flat card hover effect */
+        .flat-card {
+            border: 1px solid #E5E8E8;
+            transition: all 0.25s ease-in-out;
         }
-        .dark ::-webkit-scrollbar-thumb {
-            background: #334155;
+        .dark .flat-card {
+            border-color: #2C3535;
         }
+        .flat-card:hover {
+            border-color: #26A69A !important;
+        }
+
+        /* Sound wave animation */
+        @keyframes sound-wave {
+            0%, 100% { height: 4px; }
+            50% { height: 16px; }
+        }
+        .wave-bar {
+            animation: sound-wave 1.2s ease-in-out infinite;
+        }
+        .wave-bar:nth-child(2) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.4s; }
     </style>
 </head>
-<body class="bg-stone-50 text-stone-800 dark:bg-zinc-950 dark:text-zinc-200 transition-colors duration-300 antialiased min-h-screen flex flex-col justify-between selection:bg-brand selection:text-white">
+<body class="bg-neutral-50 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-100 font-sans tracking-relaxed antialiased selection:bg-brand selection:text-white transition-colors duration-300">
 
-    <header class="sticky top-0 z-40 bg-stone-50/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-stone-200/60 dark:border-zinc-800/60 transition-colors duration-300">
-        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-            <!-- Logo / Name -->
-            <a href="#" class="text-xl font-light tracking-widest text-stone-900 dark:text-white hover:text-brand transition-colors">
-                LIA<span class="text-brand font-bold">.</span>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://img.ai365.fans/artworks/8ea4b7f2-d381-4054-9abc-babb7a0a55dd/ifnrz3yk8b.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 w-full bg-neutral-50/90 dark:bg-neutral-900/90 backdrop-blur-md z-40 border-b border-neutral-200/60 dark:border-neutral-800 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="group flex items-center gap-2 text-xl font-semibold tracking-wider text-neutral-900 dark:text-white">
+                <span class="w-8 h-8 rounded-lg bg-brand text-white flex items-center justify-center font-bold text-sm tracking-normal">L</span>
+                <span class="group-hover:text-brand transition-colors">LIA</span>
+                <span class="text-xs font-light text-neutral-600 dark:text-neutral-400 tracking-wide ml-1 hidden sm:inline-block">/ UI/UX & Product Design</span>
             </a>
 
-            <!-- Desktop Nav Items -->
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-light tracking-wide text-stone-600 dark:text-zinc-400">
-                <a href="#about" class="hover:text-brand transition-colors">關於我</a>
-                <a href="#experience" class="hover:text-brand transition-colors">工作經歷</a>
-                <a href="#projects" class="hover:text-brand transition-colors">專案作品</a>
-                <a href="#contact" class="hover:text-brand transition-colors">聯絡方式</a>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-normal text-neutral-600 dark:text-neutral-300 tracking-wide">
+                <a href="#about" class="hover:text-brand dark:hover:text-brand transition-colors py-1">關於我</a>
+                <a href="#experience" class="hover:text-brand dark:hover:text-brand transition-colors py-1">工作經歷</a>
+                <a href="#projects" class="hover:text-brand dark:hover:text-brand transition-colors py-1">精選專案</a>
+                <a href="#contact" class="hover:text-brand dark:hover:text-brand transition-colors py-1">聯絡方式</a>
             </nav>
 
-            <!-- Control Buttons (Theme, Music, LinkedIn) -->
-            <div class="flex items-center space-x-3">
-                <!-- LinkedIn Icon Link -->
-                <a href="https://www.linkedin.com/in/jingyu-l-8aa20a425/" target="_blank" rel="noopener noreferrer" 
-                   title="LinkedIn Profile" 
-                   class="p-2.5 rounded-xl border border-stone-200 dark:border-zinc-800 text-stone-600 dark:text-zinc-400 hover:text-brand dark:hover:text-brand hover:border-brand/40 transition-all">
+            <!-- Actions: Music, Dark Mode, LinkedIn, Contact CTA -->
+            <div class="hidden md:flex items-center space-x-3">
+                <!-- Music Toggle Button -->
+                <button id="musicToggleBtn" onclick="toggleMusic()" aria-label="Toggle background music" title="切換背景音樂" class="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 hover:text-brand dark:hover:text-brand transition-colors flex items-center gap-1.5 text-xs font-medium">
+                    <i data-feather="music" id="musicIcon" class="w-4 h-4"></i>
+                    <span id="musicBtnLabel">BGM</span>
+                </button>
+
+                <!-- Dark Mode Toggle Button -->
+                <button id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle theme mode" title="切換深淺模式" class="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 hover:text-brand dark:hover:text-brand transition-colors">
+                    <i data-feather="moon" id="themeIcon" class="w-4 h-4"></i>
+                </button>
+
+                <!-- LinkedIn Link -->
+                <a href="https://www.linkedin.com/in/jingyu-l-8aa20a425/" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile" class="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 hover:text-brand dark:hover:text-brand transition-colors flex items-center justify-center">
                     <i data-feather="linkedin" class="w-4 h-4"></i>
                 </a>
 
-                <!-- Background Music Toggle -->
-                <button id="musicToggleBtn" onclick="toggleMusic()" 
-                        title="背景音樂"
-                        class="p-2.5 rounded-xl border border-stone-200 dark:border-zinc-800 text-stone-600 dark:text-zinc-400 hover:text-brand dark:hover:text-brand hover:border-brand/40 transition-all flex items-center gap-1.5 text-xs font-light">
-                    <i id="musicIcon" data-feather="disc" class="w-4 h-4"></i>
-                    <span id="musicText" class="hidden sm:inline">BGM</span>
-                </button>
+                <!-- CTA Button -->
+                <a href="#contact" class="px-5 py-2.5 rounded-xl bg-brand text-white text-sm tracking-wide font-medium hover:bg-brand-hover transition-colors flex items-center gap-2">
+                    <span>與我聊聊</span>
+                    <i data-feather="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+            </div>
 
-                <!-- Dark / Light Theme Switcher -->
-                <button id="themeToggleBtn" onclick="toggleTheme()" 
-                        title="切換深淺模式"
-                        class="p-2.5 rounded-xl border border-stone-200 dark:border-zinc-800 text-stone-600 dark:text-zinc-400 hover:text-brand dark:hover:text-brand hover:border-brand/40 transition-all">
-                    <i id="themeIcon" data-feather="moon" class="w-4 h-4"></i>
+            <!-- Mobile Actions & Hamburger Button -->
+            <div class="flex items-center space-x-2 md:hidden">
+                <button onclick="toggleMusic()" aria-label="Toggle Music" class="p-2 text-neutral-800 dark:text-neutral-200 hover:text-brand">
+                    <i data-feather="music" class="w-5 h-5"></i>
                 </button>
-
-                <!-- Mobile Menu Button -->
-                <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-xl border border-stone-200 dark:border-zinc-800 text-stone-600 dark:text-zinc-400">
-                    <i data-feather="menu" class="w-4 h-4"></i>
+                <button onclick="toggleTheme()" aria-label="Toggle Theme" class="p-2 text-neutral-800 dark:text-neutral-200 hover:text-brand">
+                    <i data-feather="moon" id="themeIconMobile" class="w-5 h-5"></i>
+                </button>
+                <a href="https://www.linkedin.com/in/jingyu-l-8aa20a425/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" class="p-2 text-neutral-800 dark:text-neutral-200 hover:text-brand">
+                    <i data-feather="linkedin" class="w-5 h-5"></i>
+                </a>
+                <button id="mobileMenuBtn" aria-label="Toggle navigation menu" class="p-2 text-neutral-800 dark:text-neutral-200 hover:text-brand focus:outline-none">
+                    <i data-feather="menu" id="menuIcon" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Navigation Menu Dropdown -->
-        <div id="mobileMenu" class="hidden md:hidden border-b border-stone-200 dark:border-zinc-800 bg-stone-50/95 dark:bg-zinc-950/95 px-6 py-4 space-y-3 text-sm font-light">
-            <a href="#about" onclick="toggleMobileMenu()" class="block py-1 text-stone-600 dark:text-zinc-300 hover:text-brand">關於我</a>
-            <a href="#experience" onclick="toggleMobileMenu()" class="block py-1 text-stone-600 dark:text-zinc-300 hover:text-brand">工作經歷</a>
-            <a href="#projects" onclick="toggleMobileMenu()" class="block py-1 text-stone-600 dark:text-zinc-300 hover:text-brand">專案作品</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="block py-1 text-stone-600 dark:text-zinc-300 hover:text-brand">聯絡方式</a>
-            <a href="https://www.linkedin.com/in/jingyu-l-8aa20a425/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 py-1 text-brand">
-                <i data-feather="linkedin" class="w-4 h-4"></i> LinkedIn 個人頁面
-            </a>
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-neutral-50 dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 px-6 py-6 transition-all duration-300">
+            <div class="flex flex-col space-y-4 text-base text-neutral-700 dark:text-neutral-200 tracking-wide font-normal">
+                <a href="#about" class="mobile-nav-link py-2 border-b border-neutral-100 dark:border-neutral-800 hover:text-brand">關於我</a>
+                <a href="#experience" class="mobile-nav-link py-2 border-b border-neutral-100 dark:border-neutral-800 hover:text-brand">工作經歷</a>
+                <a href="#projects" class="mobile-nav-link py-2 border-b border-neutral-100 dark:border-neutral-800 hover:text-brand">精選專案</a>
+                <a href="#contact" class="mobile-nav-link py-2 border-b border-neutral-100 dark:border-neutral-800 hover:text-brand">聯絡方式</a>
+                <a href="https://www.linkedin.com/in/jingyu-l-8aa20a425/" target="_blank" rel="noopener noreferrer" class="mobile-nav-link py-2 flex items-center justify-between text-brand font-medium">
+                    <span>LinkedIn 個人主頁</span>
+                    <i data-feather="external-link" class="w-4 h-4"></i>
+                </a>
+                <a href="#contact" class="mobile-nav-link mt-2 text-center py-3 rounded-xl bg-brand text-white font-medium">與我聊聊</a>
+            </div>
         </div>
     </header>
 
-    <!-- Background Audio Element -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="https://img.ai365.fans/artworks/8ea4b7f2-d381-4054-9abc-babb7a0a55dd/ifnrz3yk8b.mp3" type="audio/mpeg">
-    </audio>
-
-    <main class="max-w-5xl mx-auto px-6 py-12 md:py-20 space-y-24 md:space-y-32 flex-grow">
-
-        <section id="about" class="pt-6 space-y-8">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand/30 bg-brand-soft text-brand text-xs font-light tracking-wider">
-                <span class="w-2 h-2 rounded-full bg-brand animate-pulse"></span>
-                New Taipei City, Taiwan &nbsp;|&nbsp; 4 年實務經驗
+    <!-- Hero Section -->
+    <section class="pt-36 pb-20 md:pt-48 md:pb-32 max-w-6xl mx-auto px-6">
+        <div class="max-w-4xl space-y-8">
+            <!-- Location Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-light dark:bg-brand/20 text-brand dark:text-brand-muted text-xs md:text-sm font-medium tracking-wide">
+                <i data-feather="map-pin" class="w-3.5 h-3.5"></i>
+                <span>New Taipei City, Taiwan</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
+                <span>全週期產品開發</span>
             </div>
 
-            <div class="space-y-4 max-w-3xl">
-                <h1 class="text-3xl md:text-5xl font-light tracking-wide text-stone-900 dark:text-white leading-relaxed">
-                    你好！我是 <span class="font-normal text-brand">LIA</span>
-                </h1>
-                <p class="text-lg md:text-xl font-light text-stone-600 dark:text-zinc-300 leading-relaxed tracking-wide">
-                    致力於將複雜的邏輯轉化為直覺的使用者介面。
+            <!-- Main Tagline -->
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-light text-neutral-900 dark:text-white leading-tight tracking-wide">
+                你好！我是 <span class="font-semibold text-brand">LIA</span><br>
+                將複雜邏輯轉化為<span class="underline underline-offset-8 decoration-brand/30">直覺的數位體驗</span>
+            </h1>
+
+            <!-- Summary Intro -->
+            <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 font-light leading-relaxed max-w-2xl tracking-wide">
+                擁有 4 年 UI/UX 和產品設計實務經驗，職涯跨足資訊開發與電商產業。擅長連結使用者需求、技術可行性與商業目標，打造兼具體驗與價值的數位產品。
+            </p>
+
+            <!-- Quick Key Metrics / Tags -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-neutral-200/80 dark:border-neutral-800 max-w-2xl">
+                <div class="space-y-1">
+                    <p class="text-xs text-neutral-600 dark:text-neutral-400 uppercase tracking-widest font-normal">實務經驗</p>
+                    <p class="text-xl font-medium text-neutral-900 dark:text-white tracking-wide">4+ 年</p>
+                </div>
+                <div class="space-y-1">
+                    <p class="text-xs text-neutral-600 dark:text-neutral-400 uppercase tracking-widest font-normal">核心守則</p>
+                    <p class="text-xl font-medium text-neutral-900 dark:text-white tracking-wide">理性邏輯 × 感性需求</p>
+                </div>
+                <div class="col-span-2 sm:col-span-1 space-y-1">
+                    <p class="text-xs text-neutral-600 dark:text-neutral-400 uppercase tracking-widest font-normal">擅長領域</p>
+                    <p class="text-xl font-medium text-neutral-900 dark:text-white tracking-wide">UI/UX & B2B/B2C</p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center gap-4 pt-4">
+                <a href="#projects" class="px-7 py-3.5 rounded-xl bg-brand text-white font-medium hover:bg-brand-hover transition-all flex items-center gap-2 text-sm">
+                    <span>瀏覽精選專案</span>
+                    <i data-feather="arrow-down" class="w-4 h-4"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/jingyu-l-8aa20a425/" target="_blank" rel="noopener noreferrer" class="px-7 py-3.5 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 font-medium hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all text-sm flex items-center gap-2">
+                    <i data-feather="linkedin" class="w-4 h-4 text-brand"></i>
+                    <span>LinkedIn 主頁</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white dark:bg-neutral-800/50 border-y border-neutral-200/80 dark:border-neutral-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Section Header -->
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="inline-block px-3 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 text-xs tracking-widest uppercase font-medium">About Me</div>
+                    <h2 class="text-2xl sm:text-3xl font-light text-neutral-900 dark:text-white tracking-wide">
+                        關於 <span class="font-medium text-brand">LIA</span>
+                    </h2>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-light">
+                        資訊傳播學系畢業，具備資訊整理、內容轉譯與視覺整合底蘊。
+                    </p>
+                </div>
+
+                <!-- Section Main Content -->
+                <div class="lg:col-span-8 space-y-8">
+                    
+                    <!-- Main Text Narrative -->
+                    <div class="p-8 rounded-2xl bg-neutral-50 dark:bg-neutral-800 flat-card space-y-6">
+                        <p class="text-base sm:text-lg text-neutral-800 dark:text-neutral-200 font-light leading-relaxed">
+                            畢業於資訊傳播學系，目前擁有 <span class="font-medium text-brand">4 年 UI/UX 和產品設計實務經驗</span>，職涯跨足資訊開發與電商產業。
+                        </p>
+                        <p class="text-neutral-600 dark:text-neutral-400 font-light leading-relaxed text-sm sm:text-base">
+                            具備產品全週期開發和跨部門團隊協作經驗，能平衡使用者需求、技術可行性與商業目標。我致力於將複雜的邏輯轉化為直覺的使用者介面。
+                        </p>
+                        
+                        <!-- Core Quote Callout -->
+                        <div class="p-5 rounded-xl bg-white dark:bg-neutral-900 border-l-4 border-brand space-y-2">
+                            <p class="text-neutral-800 dark:text-neutral-200 font-medium text-sm sm:text-base italic">
+                                「對我而言，設計不只是視覺的呈現，更是理性邏輯與感性需求的結合，期望能一起打造出兼具服務體驗與商業價值的數位產品。」
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Core Competency Pillars -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        
+                        <!-- Pillar 1 -->
+                        <div class="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 flat-card space-y-3">
+                            <div class="w-10 h-10 rounded-lg bg-brand-light dark:bg-brand/20 text-brand dark:text-brand-muted flex items-center justify-center">
+                                <i data-feather="user-check" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-medium text-neutral-900 dark:text-white text-base">使用者需求</h3>
+                            <p class="text-xs text-neutral-600 dark:text-neutral-400 font-light leading-relaxed">
+                                透過使用者研究歸納痛點，確保服務設計真正切中用戶的核心情境與體驗。
+                            </p>
+                        </div>
+
+                        <!-- Pillar 2 -->
+                        <div class="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 flat-card space-y-3">
+                            <div class="w-10 h-10 rounded-lg bg-brand-light dark:bg-brand/20 text-brand dark:text-brand-muted flex items-center justify-center">
+                                <i data-feather="code" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-medium text-neutral-900 dark:text-white text-base">技術可行性</h3>
+                            <p class="text-xs text-neutral-600 dark:text-neutral-400 font-light leading-relaxed">
+                                具備資訊開發背景，能與工程團隊（RD）順暢溝通，降低轉譯與實作摩擦。
+                            </p>
+                        </div>
+
+                        <!-- Pillar 3 -->
+                        <div class="p-6 rounded-xl bg-neutral-50 dark:bg-neutral-800 flat-card space-y-3">
+                            <div class="w-10 h-10 rounded-lg bg-brand-light dark:bg-brand/20 text-brand dark:text-brand-muted flex items-center justify-center">
+                                <i data-feather="trending-up" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-medium text-neutral-900 dark:text-white text-base">商業目標</h3>
+                            <p class="text-xs text-neutral-600 dark:text-neutral-400 font-light leading-relaxed">
+                                結合電商與數據分析，將營運與商業需求轉化為明確的產品規格與增長指標。
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 max-w-6xl mx-auto px-6">
+        <div class="space-y-12">
+            
+            <!-- Section Title Header -->
+            <div class="space-y-3 max-w-2xl">
+                <div class="inline-block px-3 py-1 rounded-md bg-brand-light dark:bg-brand/20 text-brand dark:text-brand-muted text-xs tracking-widest uppercase font-medium">Career History</div>
+                <h2 class="text-2xl sm:text-3xl font-light text-neutral-900 dark:text-white tracking-wide">
+                    工作經歷 <span class="text-xs text-neutral-600 dark:text-neutral-400 font-light ml-2">Total 4 Years Experience</span>
+                </h2>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 font-light">
+                    從實習編輯到 UI/UX 設計師與產品規劃師，累積跨部門協作與全週期開發軟實力。
                 </p>
             </div>
 
-            <p class="text-stone-500 dark:text-zinc-400 font-light leading-relaxed max-w-2xl text-sm md:text-base">
-                畢業於資訊傳播學系，職涯跨足資訊開發與電商產業。具備產品全週期開發和跨部門團隊協作經驗，能精準平衡使用者需求、技術可行性與商業目標。
-                對我而言，設計不只是視覺呈現，更是理性邏輯與感性需求的結合。
-            </p>
-
-            <div class="flex flex-wrap items-center gap-4 pt-2">
-                <a href="#projects" class="px-6 py-3 rounded-xl bg-brand text-white hover:bg-brand-dark transition-all text-sm tracking-wider font-light flex items-center gap-2">
-                    瀏覽精選專案
-                    <i data-feather="arrow-down-right" class="w-4 h-4"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/jingyu-l-8aa20a425/" target="_blank" rel="noopener noreferrer" 
-                   class="px-6 py-3 rounded-xl border border-stone-200 dark:border-zinc-800 text-stone-700 dark:text-zinc-300 hover:border-brand hover:text-brand transition-all text-sm tracking-wider font-light flex items-center gap-2">
-                    <i data-feather="linkedin" class="w-4 h-4 text-brand"></i>
-                    LinkedIn 履歷
-                </a>
-            </div>
-        </section>
-
-        <section id="experience" class="space-y-10">
-            <div class="border-b border-stone-200 dark:border-zinc-800 pb-4">
-                <h2 class="text-xs uppercase tracking-widest text-brand font-medium">Experience</h2>
-                <p class="text-2xl font-light text-stone-900 dark:text-white mt-1">工作經歷</p>
-            </div>
-
-            <div class="space-y-8">
+            <!-- Timeline List Container -->
+            <div class="relative border-l-2 border-neutral-200 dark:border-neutral-800 ml-3 sm:ml-6 pl-6 sm:pl-10 space-y-12">
+                
                 <!-- Role 1 -->
-                <div class="p-6 md:p-8 rounded-2xl border border-stone-200/80 dark:border-zinc-800/80 bg-white/50 dark:bg-zinc-900/40 space-y-4">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-stone-100 dark:border-zinc-800/60 pb-4">
-                        <div>
-                            <h3 class="text-lg font-medium text-stone-900 dark:text-white">產品規劃師</h3>
-                            <p class="text-xs text-brand font-light mt-0.5">【平衡商業需求與技術限制，與大型團隊維護現有產品並持續推動更新】</p>
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-brand border-4 border-white dark:border-neutral-900 shadow-sm transition-transform group-hover:scale-125"></div>
+
+                    <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-neutral-800 flat-card space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-100 dark:border-neutral-700/60 pb-4">
+                            <div>
+                                <span class="text-xs font-medium text-brand dark:text-brand-muted tracking-widest uppercase bg-brand-light dark:bg-brand/20 px-2.5 py-1 rounded-md">
+                                    2023/11 - 2026/03 (2年5個月)
+                                </span>
+                            </div>
+                            <span class="text-xs text-neutral-600 dark:text-neutral-400 font-light">全職・資訊開發與電商產業</span>
                         </div>
-                        <span class="text-xs font-light text-stone-400 dark:text-zinc-500 whitespace-nowrap">
-                            2023/11 - 2026/03 (2年5個月)
-                        </span>
+
+                        <div>
+                            <h3 class="text-xl font-medium text-neutral-900 dark:text-white tracking-wide">產品規劃師</h3>
+                            <p class="text-xs sm:text-sm text-brand dark:text-brand-muted font-normal mt-1">
+                                【平衡商業需求與技術限制，與大型團隊維護現有產品並持續推動更新】
+                            </p>
+                        </div>
+
+                        <ul class="space-y-3 pt-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 font-light">
+                            <li class="flex items-start gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand mt-2 shrink-0"></span>
+                                <div>
+                                    <strong class="font-medium text-neutral-800 dark:text-neutral-100">商業需求轉化：</strong>
+                                    結合電商數據與競品分析，定義產品需求與優化方向。
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand mt-2 shrink-0"></span>
+                                <div>
+                                    <strong class="font-medium text-neutral-800 dark:text-neutral-100">全週期產品規畫：</strong>
+                                    獨立負責功能規劃、介面設計、規格撰寫、上線測試。
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand mt-2 shrink-0"></span>
+                                <div>
+                                    <strong class="font-medium text-neutral-800 dark:text-neutral-100">多部門協作：</strong>
+                                    與需求單位、PM、RD密切合作，平衡商業需求與技術限制。
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="space-y-2 text-sm font-light text-stone-600 dark:text-zinc-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand font-bold mt-1">•</span>
-                            <span><strong>商業需求轉化：</strong>結合電商數據與競品分析，定義產品需求與優化方向。</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand font-bold mt-1">•</span>
-                            <span><strong>全週期產品規劃：</strong>獨立負責功能規劃、介面設計、規格撰寫、上線測試。</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand font-bold mt-1">•</span>
-                            <span><strong>多部門協作：</strong>與需求單位、PM、RD 密切合作，平衡商業需求與技術限制。</span>
-                        </li>
-                    </ul>
                 </div>
 
                 <!-- Role 2 -->
-                <div class="p-6 md:p-8 rounded-2xl border border-stone-200/80 dark:border-zinc-800/80 bg-white/50 dark:bg-zinc-900/40 space-y-4">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-stone-100 dark:border-zinc-800/60 pb-4">
-                        <div>
-                            <h3 class="text-lg font-medium text-stone-900 dark:text-white">UI/UX 設計師</h3>
-                            <p class="text-xs text-brand font-light mt-0.5">【擁有專案從 0 到 1 開發經驗，經歷從開發評估到實際上線的過程】</p>
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-neutral-300 dark:bg-neutral-700 border-4 border-white dark:border-neutral-900 group-hover:bg-brand transition-transform group-hover:scale-125"></div>
+
+                    <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-neutral-800 flat-card space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-100 dark:border-neutral-700/60 pb-4">
+                            <div>
+                                <span class="text-xs font-medium text-neutral-600 dark:text-neutral-300 tracking-widest uppercase bg-neutral-100 dark:bg-neutral-700/50 px-2.5 py-1 rounded-md">
+                                    2022/05 - 2023/08 (1年4個月)
+                                </span>
+                            </div>
+                            <span class="text-xs text-neutral-600 dark:text-neutral-400 font-light">全職・UI/UX 設計</span>
                         </div>
-                        <span class="text-xs font-light text-stone-400 dark:text-zinc-500 whitespace-nowrap">
-                            2022/05 - 2023/08 (1年4個月)
-                        </span>
+
+                        <div>
+                            <h3 class="text-xl font-medium text-neutral-900 dark:text-white tracking-wide">UI/UX 設計師</h3>
+                            <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-normal mt-1">
+                                【擁有專案從 0 到 1 開發經驗，經歷從開發評估到實際上線的過程】
+                            </p>
+                        </div>
+
+                        <ul class="space-y-3 pt-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 font-light">
+                            <li class="flex items-start gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand mt-2 shrink-0"></span>
+                                <div>
+                                    <strong class="font-medium text-neutral-800 dark:text-neutral-100">需求定義：</strong>
+                                    透過使用者研究歸納痛點並定義需求。
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand mt-2 shrink-0"></span>
+                                <div>
+                                    <strong class="font-medium text-neutral-800 dark:text-neutral-100">體驗規劃：</strong>
+                                    主要負責 Flow Chart、Wireframe，確保流程與邏輯順暢。
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand mt-2 shrink-0"></span>
+                                <div>
+                                    <strong class="font-medium text-neutral-800 dark:text-neutral-100">設計系統規劃：</strong>
+                                    定義 Design Guideline，確保產品一致性與可維護性。
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="space-y-2 text-sm font-light text-stone-600 dark:text-zinc-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand font-bold mt-1">•</span>
-                            <span><strong>需求定義：</strong>透過使用者研究歸納痛點並定義需求。</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand font-bold mt-1">•</span>
-                            <span><strong>體驗規劃：</strong>主要負責 Flow Chart、Wireframe，確保流程與邏輯順暢。</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand font-bold mt-1">•</span>
-                            <span><strong>設計系統規劃：</strong>定義 Design Guideline，確保產品一致性與可維護性。</span>
-                        </li>
-                    </ul>
                 </div>
 
                 <!-- Role 3 -->
-                <div class="p-6 md:p-8 rounded-2xl border border-stone-200/80 dark:border-zinc-800/80 bg-white/50 dark:bg-zinc-900/40 space-y-4">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-stone-100 dark:border-zinc-800/60 pb-4">
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-neutral-300 dark:bg-neutral-700 border-4 border-white dark:border-neutral-900 group-hover:bg-brand transition-transform group-hover:scale-125"></div>
+
+                    <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-neutral-800 flat-card space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-100 dark:border-neutral-700/60 pb-4">
+                            <div>
+                                <span class="text-xs font-medium text-neutral-600 dark:text-neutral-300 tracking-widest uppercase bg-neutral-100 dark:bg-neutral-700/50 px-2.5 py-1 rounded-md">
+                                    2020/06 - 2020/08 (3個月)
+                                </span>
+                            </div>
+                            <span class="text-xs text-neutral-600 dark:text-neutral-400 font-light">實習・科技雜誌社</span>
+                        </div>
+
                         <div>
-                            <h3 class="text-lg font-medium text-stone-900 dark:text-white">美編 / 編輯實習生</h3>
-                            <p class="text-xs text-brand font-light mt-0.5">【協助科技雜誌製作，培養資訊整理與內容轉譯能力】</p>
+                            <h3 class="text-xl font-medium text-neutral-900 dark:text-white tracking-wide">美編 / 編輯實習生</h3>
+                            <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-normal mt-1">
+                                【協助科技雜誌製作，培養資訊整理與內容轉譯能力】
+                            </p>
                         </div>
-                        <span class="text-xs font-light text-stone-400 dark:text-zinc-500 whitespace-nowrap">
-                            2020/06 - 2020/08 (3個月)
-                        </span>
+
+                        <ul class="space-y-3 pt-2 text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 font-light">
+                            <li class="flex items-start gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand mt-2 shrink-0"></span>
+                                <div>
+                                    <strong class="font-medium text-neutral-800 dark:text-neutral-100">採訪與撰寫：</strong>
+                                    參與採訪與文章撰寫，將複雜資訊轉化為易讀內容。
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-brand mt-2 shrink-0"></span>
+                                <div>
+                                    <strong class="font-medium text-neutral-800 dark:text-neutral-100">編輯、校稿與排版：</strong>
+                                    協助編排雜誌內容，培養資訊整理能力與版面概念。
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="space-y-2 text-sm font-light text-stone-600 dark:text-zinc-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand font-bold mt-1">•</span>
-                            <span><strong>採訪與撰寫：</strong>參與採訪與文章撰寫，將複雜資訊轉化為易讀內容。</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-brand font-bold mt-1">•</span>
-                            <span><strong>編輯、校稿與排版：</strong>協助編排雜誌內容，培養資訊整理能力與版面概念。</span>
-                        </li>
-                    </ul>
                 </div>
-            </div>
-        </section>
 
-        <section id="projects" class="space-y-10">
-            <div class="border-b border-stone-200 dark:border-zinc-800 pb-4">
-                <h2 class="text-xs uppercase tracking-widest text-brand font-medium">Projects</h2>
-                <p class="text-2xl font-light text-stone-900 dark:text-white mt-1">專案作品</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="projects" class="py-20 bg-white dark:bg-neutral-800/50 border-t border-neutral-200/80 dark:border-neutral-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-6 space-y-12">
+            
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div class="space-y-3">
+                    <div class="inline-block px-3 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 text-xs tracking-widest uppercase font-medium">Portfolio</div>
+                    <h2 class="text-2xl sm:text-3xl font-light text-neutral-900 dark:text-white tracking-wide">
+                        精選專案 <span class="font-medium text-brand">Case Studies</span>
+                    </h2>
+                </div>
+                <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 font-light max-w-xs">
+                    涵蓋 B2B 系統重構、線上電子票券流程優化與會員生態圈機制設計。
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Project 1 -->
-                <div class="p-6 rounded-2xl border border-stone-200/80 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/50 flex flex-col justify-between hover:border-brand/50 transition-all group">
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1 -->
+                <div class="group rounded-2xl bg-neutral-50 dark:bg-neutral-800 flat-card flex flex-col justify-between overflow-hidden p-6 sm:p-8 space-y-6 hover:bg-white dark:hover:bg-neutral-800/90 transition-all">
                     <div class="space-y-4">
-                        <div class="w-10 h-10 rounded-xl bg-brand-soft flex items-center justify-center text-brand">
-                            <i data-feather="leaf" class="w-5 h-5"></i>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-medium text-brand dark:text-brand-muted bg-brand-light dark:bg-brand/20 px-3 py-1 rounded-full">
+                                會員體驗與數據
+                            </span>
+                            <span class="text-xs text-neutral-600 dark:text-neutral-400 font-light">01</span>
                         </div>
-                        <h3 class="text-lg font-normal text-stone-900 dark:text-white group-hover:text-brand transition-colors">
+
+                        <h3 class="text-xl font-medium text-neutral-900 dark:text-white group-hover:text-brand transition-colors leading-snug">
                             綠活會員生態圈優化
                         </h3>
-                        <p class="text-sm font-light text-stone-500 dark:text-zinc-400 leading-relaxed">
-                            本專案重新設計綠活會員機制，透過「數據視覺化」與「點數回饋」，將抽象的減碳行動轉化為可感知的會員體驗，有效提升會員參與度與忠誠度。
+
+                        <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 font-light leading-relaxed">
+                            本專案重新設計綠活會員機制，透過「數據視覺化」與「點數回饋」，將抽象的減碳行動轉化為可感知的會員體驗，有效提升會員參與度。
                         </p>
                     </div>
-                    <div class="pt-6 flex items-center text-xs text-brand font-light gap-1">
-                        <span>數據視覺化 • 會員機制</span>
+
+                    <div class="space-y-4 pt-4 border-t border-neutral-200/60 dark:border-neutral-700/60">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 text-neutral-600 dark:text-neutral-200 font-light">數據視覺化</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 text-neutral-600 dark:text-neutral-200 font-light">點數回饋</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 text-neutral-600 dark:text-neutral-200 font-light">減碳體驗</span>
+                        </div>
+
+                        <button onclick="openProjectModal('project1')" class="w-full py-2.5 rounded-xl bg-neutral-200/60 dark:bg-neutral-700/60 group-hover:bg-brand group-hover:text-white text-neutral-700 dark:text-neutral-200 text-xs font-medium transition-all flex items-center justify-center gap-1.5">
+                            <span>查看專案細節</span>
+                            <i data-feather="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="p-6 rounded-2xl border border-stone-200/80 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/50 flex flex-col justify-between hover:border-brand/50 transition-all group">
+                <!-- Project Card 2 -->
+                <div class="group rounded-2xl bg-neutral-50 dark:bg-neutral-800 flat-card flex flex-col justify-between overflow-hidden p-6 sm:p-8 space-y-6 hover:bg-white dark:hover:bg-neutral-800/90 transition-all">
                     <div class="space-y-4">
-                        <div class="w-10 h-10 rounded-xl bg-brand-soft flex items-center justify-center text-brand">
-                            <i data-feather="credit-card" class="w-5 h-5"></i>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-medium text-brand dark:text-brand-muted bg-brand-light dark:bg-brand/20 px-3 py-1 rounded-full">
+                                流程重構與系統開發
+                            </span>
+                            <span class="text-xs text-neutral-600 dark:text-neutral-400 font-light">02</span>
                         </div>
-                        <h3 class="text-lg font-normal text-stone-900 dark:text-white group-hover:text-brand transition-colors">
+
+                        <h3 class="text-xl font-medium text-neutral-900 dark:text-white group-hover:text-brand transition-colors leading-snug">
                             飯店電子票券系統開發
                         </h3>
-                        <p class="text-sm font-light text-stone-500 dark:text-zinc-400 leading-relaxed">
-                            針對市場上票券系統與訂房系統脫鉤、仰賴人工核銷的痛點，重新定義「販售、訂房、入住」流程，成功消除消費者與飯店端的營運摩擦力。
+
+                        <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 font-light leading-relaxed">
+                            針對市場上票券系統與訂房系統脫鉤、需仰賴人工核銷狀態的痛點，重新定義「販售、訂房、入住」流程，消除消費者與飯店端的摩擦力。
                         </p>
                     </div>
-                    <div class="pt-6 flex items-center text-xs text-brand font-light gap-1">
-                        <span>流程重構 • O2O系統</span>
+
+                    <div class="space-y-4 pt-4 border-t border-neutral-200/60 dark:border-neutral-700/60">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 text-neutral-600 dark:text-neutral-200 font-light">流程重新定義</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 text-neutral-600 dark:text-neutral-200 font-light">自動化核銷</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 text-neutral-600 dark:text-neutral-200 font-light">雙端體驗優化</span>
+                        </div>
+
+                        <button onclick="openProjectModal('project2')" class="w-full py-2.5 rounded-xl bg-neutral-200/60 dark:bg-neutral-700/60 group-hover:bg-brand group-hover:text-white text-neutral-700 dark:text-neutral-200 text-xs font-medium transition-all flex items-center justify-center gap-1.5">
+                            <span>查看專案細節</span>
+                            <i data-feather="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="p-6 rounded-2xl border border-stone-200/80 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/50 flex flex-col justify-between hover:border-brand/50 transition-all group">
+                <!-- Project Card 3 -->
+                <div class="group rounded-2xl bg-neutral-50 dark:bg-neutral-800 flat-card flex flex-col justify-between overflow-hidden p-6 sm:p-8 space-y-6 hover:bg-white dark:hover:bg-neutral-800/90 transition-all">
                     <div class="space-y-4">
-                        <div class="w-10 h-10 rounded-xl bg-brand-soft flex items-center justify-center text-brand">
-                            <i data-feather="grid" class="w-5 h-5"></i>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-medium text-brand dark:text-brand-muted bg-brand-light dark:bg-brand/20 px-3 py-1 rounded-full">
+                                B2B 介面與架構優化
+                            </span>
+                            <span class="text-xs text-neutral-600 dark:text-neutral-400 font-light">03</span>
                         </div>
-                        <h3 class="text-lg font-normal text-stone-900 dark:text-white group-hover:text-brand transition-colors">
+
+                        <h3 class="text-xl font-medium text-neutral-900 dark:text-white group-hover:text-brand transition-colors leading-snug">
                             飯店訂房系統改版
                         </h3>
-                        <p class="text-sm font-light text-stone-500 dark:text-zinc-400 leading-relaxed">
-                            針對客戶反饋操作複雜、不易大量修改等痛點，將串接國內外多家 OTA 與 PMS 系統的 B2B 訂房系統進行「月表管理頁面」全面重構與 UI 升級。
+
+                        <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 font-light leading-relaxed">
+                            針對客戶反饋操作複雜、不易大量修改等痛點，將串接國內外多家 OTA 與 PMS 系統的 B2B 訂房系統進行「月表管理頁面」重構。
                         </p>
                     </div>
-                    <div class="pt-6 flex items-center text-xs text-brand font-light gap-1">
-                        <span>B2B 管理後台 • 複雜邏輯</span>
+
+                    <div class="space-y-4 pt-4 border-t border-neutral-200/60 dark:border-neutral-700/60">
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 text-neutral-600 dark:text-neutral-200 font-light">B2B 系統重構</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 text-neutral-600 dark:text-neutral-200 font-light">月表管理</span>
+                            <span class="text-xs px-2.5 py-1 rounded-md bg-white dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 text-neutral-600 dark:text-neutral-200 font-light">OTA/PMS 串接</span>
+                        </div>
+
+                        <button onclick="openProjectModal('project3')" class="w-full py-2.5 rounded-xl bg-neutral-200/60 dark:bg-neutral-700/60 group-hover:bg-brand group-hover:text-white text-neutral-700 dark:text-neutral-200 text-xs font-medium transition-all flex items-center justify-center gap-1.5">
+                            <span>查看專案細節</span>
+                            <i data-feather="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
                     </div>
                 </div>
+
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contact" class="p-8 md:p-12 rounded-2xl border border-stone-200/80 dark:border-zinc-800/80 bg-stone-100/50 dark:bg-zinc-900/30 text-center space-y-6">
-            <h2 class="text-2xl font-light text-stone-900 dark:text-white">期待與您一起打造優質數位產品</h2>
-            <p class="text-sm font-light text-stone-500 dark:text-zinc-400 max-w-xl mx-auto">
-                如果您對我的工作經歷或專案有興趣，歡迎透過 LinkedIn 或 Email 與我聯繫！
-            </p>
+    <!-- Capabilities Section -->
+    <section class="py-20 max-w-6xl mx-auto px-6">
+        <div class="p-8 sm:p-12 rounded-3xl bg-neutral-900 text-white space-y-10 border border-neutral-800">
+            <div class="max-w-2xl space-y-3">
+                <span class="text-xs font-medium text-brand-muted tracking-widest uppercase">Capabilities</span>
+                <h2 class="text-2xl sm:text-3xl font-light tracking-wide text-white">專業技能與開發脈絡</h2>
+                <p class="text-neutral-400 font-light text-sm">
+                    強調邏輯思維、敏捷溝通與實作品質，確保每一個產品細節都能落地。
+                </p>
+            </div>
 
-            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-                <a href="https://www.linkedin.com/in/jingyu-l-8aa20a425/" target="_blank" rel="noopener noreferrer"
-                   class="px-6 py-3 rounded-xl bg-brand text-white hover:bg-brand-dark transition-all text-sm font-light flex items-center gap-2">
-                    <i data-feather="linkedin" class="w-4 h-4"></i>
-                    LinkedIn 聯繫
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="space-y-3 border-l border-neutral-800 pl-6">
+                    <h3 class="text-base font-medium text-white">UI/UX 設計與體驗</h3>
+                    <p class="text-xs text-neutral-400 font-light leading-relaxed">
+                        Flow Chart, Wireframe, Interactive Prototype, Design System, Design Guidelines, UI/UX Research, Visual Polish.
+                    </p>
+                </div>
+
+                <div class="space-y-3 border-l border-neutral-800 pl-6">
+                    <h3 class="text-base font-medium text-white">產品規劃與競品分析</h3>
+                    <p class="text-xs text-neutral-400 font-light leading-relaxed">
+                        PRD 規格撰寫, 需求定義, 競品調研, 電商數據分析, 0到1 產品開發評估, 月表/後台重構.
+                    </p>
+                </div>
+
+                <div class="space-y-3 border-l border-neutral-800 pl-6">
+                    <h3 class="text-base font-medium text-white">跨團隊溝通與推進</h3>
+                    <p class="text-xs text-neutral-400 font-light leading-relaxed">
+                        與 PM / RD / 業務需求單位溝通, 技術可行性評估, 上線測試 (QA), 敏捷軟體開發協作.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer Section -->
+    <section id="contact" class="py-20 bg-white dark:bg-neutral-800/50 border-t border-neutral-200 dark:border-neutral-800 transition-colors">
+        <div class="max-w-6xl mx-auto px-6 text-center space-y-8">
+            <div class="max-w-xl mx-auto space-y-4">
+                <div class="inline-block px-3 py-1 rounded-md bg-brand-light dark:bg-brand/20 text-brand dark:text-brand-muted text-xs tracking-widest uppercase font-medium">Get In Touch</div>
+                <h2 class="text-3xl font-light text-neutral-900 dark:text-white tracking-wide">
+                    期待與您一起打造數位產品！
+                </h2>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 font-light leading-relaxed">
+                    無論是新的產品開發專案、UI/UX 設計諮詢，或是團隊合作交流，都歡迎與我聯繫。
+                </p>
+            </div>
+
+            <!-- Email & LinkedIn Action Box -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-lg mx-auto">
+                <div class="w-full sm:w-auto inline-flex items-center gap-3 p-3 rounded-2xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
+                    <div class="px-2 text-sm text-neutral-700 dark:text-neutral-200 font-mono tracking-wide font-light">
+                        lia.design@example.com
+                    </div>
+                    <button onclick="copyEmail('lia.design@example.com')" id="copyBtn" class="px-5 py-2.5 rounded-xl bg-brand text-white text-xs font-medium hover:bg-brand-hover transition-colors flex items-center gap-2">
+                        <i data-feather="copy" class="w-3.5 h-3.5"></i>
+                        <span id="copyBtnText">複製 Email</span>
+                    </button>
+                </div>
+
+                <!-- LinkedIn Contact Button -->
+                <a href="https://www.linkedin.com/in/jingyu-l-8aa20a425/" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 hover:text-brand dark:hover:text-brand text-xs font-medium transition-colors flex items-center justify-center gap-2">
+                    <i data-feather="linkedin" class="w-4 h-4 text-brand"></i>
+                    <span>LinkedIn 聯繫</span>
                 </a>
+            </div>
 
-                <button onclick="copyEmail('lia.design@example.com')" 
-                        class="px-6 py-3 rounded-xl border border-stone-200 dark:border-zinc-800 text-stone-700 dark:text-zinc-300 hover:border-brand hover:text-brand transition-all text-sm font-light flex items-center gap-2">
-                    <i data-feather="mail" class="w-4 h-4"></i>
-                    複製 Email 地址
+            <!-- Location & Copyright -->
+            <div class="pt-12 border-t border-neutral-100 dark:border-neutral-800 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-600 dark:text-neutral-400 font-light gap-4">
+                <p>📍 Location: New Taipei City, Taiwan</p>
+                <div class="flex items-center gap-4">
+                    <a href="https://www.linkedin.com/in/jingyu-l-8aa20a425/" target="_blank" rel="noopener noreferrer" class="hover:text-brand transition-colors">LinkedIn Profile</a>
+                    <span>•</span>
+                    <p>© <span id="currentYear"></span> LIA Portfolio. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Audio Control Widget -->
+    <div id="floatingMusicWidget" class="fixed bottom-6 left-6 z-40 bg-white/90 dark:bg-neutral-800/90 backdrop-blur-md border border-neutral-200 dark:border-neutral-700 rounded-full px-4 py-2.5 shadow-lg flex items-center gap-3 transition-all duration-300">
+        <button onclick="toggleMusic()" class="flex items-center gap-2 text-xs text-neutral-700 dark:text-neutral-200 hover:text-brand focus:outline-none">
+            <span class="relative flex h-3 w-3">
+                <span id="musicPulse" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75 hidden"></span>
+                <span id="musicDot" class="relative inline-flex rounded-full h-3 w-3 bg-neutral-400"></span>
+            </span>
+            <span id="musicStatusText" class="font-medium">背景音樂: 關閉</span>
+        </button>
+        <!-- Soundwave indicator bars -->
+        <div id="waveContainer" class="flex items-center gap-1 h-4 hidden">
+            <span class="wave-bar w-0.5 bg-brand rounded-full"></span>
+            <span class="wave-bar w-0.5 bg-brand rounded-full"></span>
+            <span class="wave-bar w-0.5 bg-brand rounded-full"></span>
+        </div>
+    </div>
+
+    <!-- Project Detail Modal Popup -->
+    <div id="projectModal" class="fixed inset-0 bg-neutral-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 sm:p-6 transition-opacity duration-300">
+        <div class="bg-white dark:bg-neutral-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 space-y-6 relative max-h-[90vh] overflow-y-auto no-scrollbar border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-100">
+            <button onclick="closeProjectModal()" class="absolute top-6 right-6 p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
+                <i data-feather="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="space-y-2">
+                <span id="modalCategory" class="text-xs font-medium text-brand dark:text-brand-muted bg-brand-light dark:bg-brand/20 px-2.5 py-1 rounded-md">Category</span>
+                <h3 id="modalTitle" class="text-2xl font-medium text-neutral-900 dark:text-white">Project Title</h3>
+            </div>
+
+            <div id="modalBody" class="space-y-4 text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 font-light leading-relaxed border-t border-neutral-100 dark:border-neutral-700 pt-4">
+            </div>
+
+            <div class="pt-4 border-t border-neutral-100 dark:border-neutral-700 flex justify-end">
+                <button onclick="closeProjectModal()" class="px-5 py-2 rounded-xl bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 text-xs font-medium hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors">
+                    關閉視窗
                 </button>
             </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-stone-200/60 dark:border-zinc-800/60 py-8 text-center text-xs font-light text-stone-400 dark:text-zinc-500">
-        <p>© <span id="currentYear"></span> LIA. All rights reserved. Designed with simplicity & precision.</p>
-    </footer>
-
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform transition-all duration-300 opacity-0 pointer-events-none translate-y-2">
-        <div class="bg-stone-900 text-white dark:bg-zinc-100 dark:text-zinc-900 px-4 py-3 rounded-xl text-xs font-light shadow-lg flex items-center gap-2">
-            <i id="toastIcon" data-feather="check-circle" class="w-4 h-4 text-brand"></i>
-            <span id="toastMsg">已複製 Email 到剪貼簿！</span>
         </div>
+    </div>
+
+    <!-- Notification Toast for Email Copy -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs px-4 py-3 rounded-xl shadow-lg opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2 z-50">
+        <i data-feather="check-circle" class="w-4 h-4 text-brand"></i>
+        <span>已複製 Email 到剪貼簿！</span>
     </div>
 
     <script>
         let isMusicPlaying = false;
+        const bgMusic = document.getElementById('bgMusic');
 
+        // Initial setup on load
         document.addEventListener('DOMContentLoaded', () => {
-            // Safe initialize feather icons
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
-            
-            // Set current copyright year
-            const yearEl = document.getElementById('currentYear');
-            if (yearEl) {
-                yearEl.textContent = new Date().getFullYear();
-            }
-
-            // Sync music state listener
-            const audio = document.getElementById('bgMusic');
-            if (audio) {
-                audio.addEventListener('ended', () => {
-                    isMusicPlaying = false;
-                    updateMusicUI();
-                });
-            }
+            feather.replace();
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            initTheme();
         });
 
-        // Theme Switcher Logic
+        // Background Music Toggle Function
+        function toggleMusic() {
+            if (!bgMusic) return;
+
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                isMusicPlaying = false;
+                updateMusicUI(false);
+            } else {
+                bgMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    updateMusicUI(true);
+                }).catch(err => {
+                    console.log("Audio playback error:", err);
+                });
+            }
+        }
+
+        function updateMusicUI(playing) {
+            const btnLabel = document.getElementById('musicBtnLabel');
+            const statusText = document.getElementById('musicStatusText');
+            const pulse = document.getElementById('musicPulse');
+            const dot = document.getElementById('musicDot');
+            const waveContainer = document.getElementById('waveContainer');
+
+            if (playing) {
+                if (btnLabel) btnLabel.textContent = "BGM ON";
+                if (statusText) statusText.textContent = "背景音樂: 播放中";
+                if (pulse) pulse.classList.remove('hidden');
+                if (dot) {
+                    dot.classList.remove('bg-neutral-400');
+                    dot.classList.add('bg-brand');
+                }
+                if (waveContainer) waveContainer.classList.remove('hidden');
+            } else {
+                if (btnLabel) btnLabel.textContent = "BGM";
+                if (statusText) statusText.textContent = "背景音樂: 關閉";
+                if (pulse) pulse.classList.add('hidden');
+                if (dot) {
+                    dot.classList.remove('bg-brand');
+                    dot.classList.add('bg-neutral-400');
+                }
+                if (waveContainer) waveContainer.classList.add('hidden');
+            }
+        }
+
+        // Dark / Light Theme Toggle Function
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark');
+                updateThemeIcons(true);
+            } else {
+                document.documentElement.classList.remove('dark');
+                updateThemeIcons(false);
+            }
+        }
+
         function toggleTheme() {
-            const html = document.documentElement;
-            const isDark = html.classList.toggle('dark');
-            
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeIcons(isDark);
+        }
+
+        function updateThemeIcons(isDark) {
             const themeIcon = document.getElementById('themeIcon');
+            const themeIconMobile = document.getElementById('themeIconMobile');
+            
             if (themeIcon) {
                 themeIcon.setAttribute('data-feather', isDark ? 'sun' : 'moon');
             }
-
-            if (typeof feather !== 'undefined') {
-                feather.replace();
+            if (themeIconMobile) {
+                themeIconMobile.setAttribute('data-feather', isDark ? 'sun' : 'moon');
             }
-        }
-
-        // Music Switcher Logic
-        function toggleMusic() {
-            const audio = document.getElementById('bgMusic');
-            if (!audio) return;
-
-            if (isMusicPlaying) {
-                audio.pause();
-                isMusicPlaying = false;
-            } else {
-                audio.play().then(() => {
-                    isMusicPlaying = true;
-                }).catch(err => {
-                    console.log('Audio playback prevented:', err);
-                    showToast('請再次點擊播放背景音樂', 'alert-circle');
-                });
-            }
-            updateMusicUI();
-        }
-
-        function updateMusicUI() {
-            const musicIcon = document.getElementById('musicIcon');
-            const musicText = document.getElementById('musicText');
-            const musicBtn = document.getElementById('musicToggleBtn');
-
-            if (isMusicPlaying) {
-                if (musicIcon) musicIcon.setAttribute('data-feather', 'pause-circle');
-                if (musicText) musicText.textContent = 'Pause BGM';
-                if (musicBtn) musicBtn.classList.add('text-brand', 'border-brand/50');
-            } else {
-                if (musicIcon) musicIcon.setAttribute('data-feather', 'disc');
-                if (musicText) musicText.textContent = 'BGM';
-                if (musicBtn) musicBtn.classList.remove('text-brand', 'border-brand/50');
-            }
-
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
+            feather.replace();
         }
 
         // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            if (menu) {
-                menu.classList.toggle('hidden');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Project Details Data
+        const projectData = {
+            project1: {
+                category: "會員體驗與數據優化",
+                title: "綠活會員生態圈優化",
+                body: `
+                    <p class="font-normal text-neutral-800 dark:text-neutral-100">【專案背景與痛點】</p>
+                    <p>舊有減碳行動機制過於抽象，缺乏直接誘因與感性連結，導致會員留存率與參與意願較低。</p>
+                    <p class="font-normal text-neutral-800 dark:text-neutral-100 pt-2">【設計策略與執行】</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>數據視覺化：</strong> 將用戶累積的減碳數據轉化為直觀的儀表板與視覺里程碑，讓抽象環保行動「看得見」。</li>
+                        <li><strong>點數回饋機制：</strong> 串接電商紅利點數，形成「行動 - 回饋 - 消費」正向生態循環。</li>
+                        <li><strong>輕量介面重構：</strong> 減少不必要的干擾元素，提升整體會員專區的操作流暢度。</li>
+                    </ul>
+                    <p class="font-normal text-neutral-800 dark:text-neutral-100 pt-2">【成果與價值】</p>
+                    <p>有效提升會員活躍度（MAU）與綠色商品重複購買率，創造品牌社會價值與商業效益雙贏。</p>
+                `
+            },
+            project2: {
+                category: "流程重構與系統開發",
+                title: "飯店電子票券系統開發",
+                body: `
+                    <p class="font-normal text-neutral-800 dark:text-neutral-100">【專案背景與痛點】</p>
+                    <p>傳統票券系統與飯店訂房系統脫鉤，需要大量人工比對核銷狀態，經常造成現場入住摩擦與客服負擔。</p>
+                    <p class="font-normal text-neutral-800 dark:text-neutral-100 pt-2">【設計策略與執行】</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>流程重新定義：</strong> 整合「線上販售 ➔ 即時訂房 ➔ 現場入住核銷」一站式全流程。</li>
+                        <li><strong>wireframe 與 Flow Chart：</strong> 梳理消費者與飯店櫃檯人員雙端的 User Flow，減少重複手動流程。</li>
+                        <li><strong>全週期參與：</strong> 獨立負責功能規劃、介面設計、規格撰寫並全程參與 QA 測試。</li>
+                    </ul>
+                    <p class="font-normal text-neutral-800 dark:text-neutral-100 pt-2">【成果與價值】</p>
+                    <p>大幅降低飯店人員人工核銷工時與營運成本，消費者訂房滿意度顯著提升。</p>
+                `
+            },
+            project3: {
+                category: "B2B 介面與架構重構",
+                title: "飯店訂房系統改版",
+                body: `
+                    <p class="font-normal text-neutral-800 dark:text-neutral-100">【專案背景與痛點】</p>
+                    <p>原 B2B 訂房系統串接國內外多家 OTA (Online Travel Agency) 與 PMS 系統，因歷史包袱導致操作介面複雜，飯店人員反應不易進行大量修改與月度房況調度。</p>
+                    <p class="font-normal text-neutral-800 dark:text-neutral-100 pt-2">【設計策略與執行】</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>月表管理頁面重構：</strong> 重新整理視圖層級，提供直觀的日曆與月表拖曳修改功能。</li>
+                        <li><strong>Design System 規範：</strong> 建立統一的 B2B 介面組件規範（Guideline），確保各介面一致性與擴充性。</li>
+                        <li><strong>跨部門溝通：</strong> 深入理解 RD 後端串接限制，以精準 Wireframe 與規格書與工程團隊進行開發對齊。</li>
+                    </ul>
+                    <p class="font-normal text-neutral-800 dark:text-neutral-100 pt-2">【成果與價值】</p>
+                    <p>顯著提升飯店管理人員的操作效率，減少房況更新錯誤率。</p>
+                `
             }
+        };
+
+        // Modal Handlers
+        function openProjectModal(projectId) {
+            const data = projectData[projectId];
+            if (!data) return;
+
+            document.getElementById('modalCategory').textContent = data.category;
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalBody').innerHTML = data.body;
+
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('hidden');
         }
 
-        // Toast Notification & Email Copy
-        function copyEmail(email) {
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(email).then(() => {
-                    showToast('已複製 Email 到剪貼簿！', 'check-circle');
-                }).catch(() => {
-                    fallbackCopy(email);
-                });
-            } else {
-                fallbackCopy(email);
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.add('hidden');
+        }
+
+        document.getElementById('projectModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('projectModal')) {
+                closeProjectModal();
             }
+        });
+
+        // Safe Email Copy Function
+        function copyEmail(text) {
+            const dummy = document.createElement('textarea');
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+            document.body.removeChild(dummy);
         }
 
-        function fallbackCopy(text) {
-            const tempInput = document.createElement('input');
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            showToast('已複製 Email 到剪貼簿！', 'check-circle');
-        }
-
-        function showToast(msg, iconName = 'check-circle') {
+        // Toast Handler
+        function showToast() {
             const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toastMsg');
-            const toastIcon = document.getElementById('toastIcon');
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
 
-            if (toastMsg) toastMsg.textContent = msg;
-            if (toastIcon) {
-                toastIcon.setAttribute('data-feather', iconName);
-            }
-
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
-
-            if (toast) {
-                toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
-                toast.classList.add('opacity-100', 'translate-y-0');
-
-                setTimeout(() => {
-                    toast.classList.remove('opacity-100', 'translate-y-0');
-                    toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
-                }, 3000);
-            }
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 3000);
         }
     </script>
 </body>
